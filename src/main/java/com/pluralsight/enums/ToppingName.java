@@ -1,7 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.enums;
 
 public enum ToppingName {
-
     //Meats
     STEAK, HAM, SALAMI, ROAST_BEEF, CHICKEN, BACON,
 
@@ -13,5 +12,4 @@ public enum ToppingName {
 
     //Sauces
     MAYO, MUSTARD, KETCHUP, RANCH, THOUSAND_ISLANDS, VINAIGRETTE,
-
 }
