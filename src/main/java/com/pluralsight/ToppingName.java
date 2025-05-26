@@ -1,0 +1,17 @@
+package com.pluralsight;
+
+public enum ToppingName {
+
+    //Meats
+    STEAK, HAM, SALAMI, ROAST_BEEF, CHICKEN, BACON,
+
+    //Cheeses
+    AMERICAN, PROVOLONE, CHEDDAR, SWISS,
+
+    //Regular Toppings
+    LETTUCE, PEPPERS, ONIONS, TOMATOES, JALAPENOS, CUCUMBERS, PICKLES, GUACAMOLE, MUSHROOMS,
+
+    //Sauces
+    MAYO, MUSTARD, KETCHUP, RANCH, THOUSAND_ISLANDS, VINAIGRETTE,
+
+}
