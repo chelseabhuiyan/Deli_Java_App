@@ -21,11 +21,27 @@ public class CustomizedSandwich extends BaseSandwich {
 
     //Method to add topping to the right list
     public void addTopping(Topping topping) {
+        if (topping == null || topping.getType() == null)
+        {return;}
+
         switch (topping.getType()) { //switch uses ToppingType to decide which list the topping goes into
             case MEAT -> meats.add(topping);
             case CHEESE -> cheeses.add(topping);
             case REGULAR -> regularToppings.add(topping);
             case SAUCE -> sauces.add(topping);
+        }
+    }
+
+    //Method to remove toppings
+    public void removeTopping(Topping topping) {
+        if (topping == null || topping.getType() == null)
+        {return;}
+
+        switch (topping.getType()) {
+            case MEAT -> meats.remove(topping);
+            case CHEESE -> cheeses.remove(topping);
+            case REGULAR -> regularToppings.remove(topping);
+            case SAUCE -> sauces.remove(topping);
         }
     }
 
@@ -58,6 +74,7 @@ public class CustomizedSandwich extends BaseSandwich {
         return basePrice + toppingCost;
     }
 
+    //uses string.join and stream
     @Override
     public String toString() {
         StringBuilder description = new StringBuilder();
@@ -66,28 +83,27 @@ public class CustomizedSandwich extends BaseSandwich {
         description.append("\n");
 
         if (!meats.isEmpty()) {
-            description.append("  Meats: ");
-            meats.forEach(m -> description.append(m.toString()).append(", "));
-            description.setLength(description.length() - 2); // remove last comma
-            description.append("\n");
+            description.append("  Meats: ")
+                    .append(String.join(", ", meats.stream().map(Topping::toString).toList()))
+                    .append("\n");
         }
+
         if (!cheeses.isEmpty()) {
-            description.append("  Cheeses: ");
-            cheeses.forEach(c -> description.append(c.toString()).append(", "));
-            description.setLength(description.length() - 2);
-            description.append("\n");
+            description.append("  Cheeses: ")
+                    .append(String.join(", ", cheeses.stream().map(Topping::toString).toList()))
+                    .append("\n");
         }
+
         if (!regularToppings.isEmpty()) {
-            description.append("  Toppings: ");
-            regularToppings.forEach(r -> description.append(r.toString()).append(", "));
-            description.setLength(description.length() - 2);
-            description.append("\n");
+            description.append("  Toppings: ")
+                    .append(String.join(", ", regularToppings.stream().map(Topping::toString).toList()))
+                    .append("\n");
         }
+
         if (!sauces.isEmpty()) {
-            description.append("  Sauces: ");
-            sauces.forEach(s -> description.append(s.toString()).append(", "));
-            description.setLength(description.length() - 2);
-            description.append("\n");
+            description.append("  Sauces: ")
+                    .append(String.join(", ", sauces.stream().map(Topping::toString).toList()))
+                    .append("\n");
         }
 
         description.append(String.format("  Total: $%.2f", getCost()));
