@@ -30,7 +30,7 @@ public abstract class BaseSandwich implements MenuItem {
 
     // These must be implemented by subclasses
     public abstract double getCost();
-    public abstract String toString();
+    public abstract String getDescription();
 }
 
 

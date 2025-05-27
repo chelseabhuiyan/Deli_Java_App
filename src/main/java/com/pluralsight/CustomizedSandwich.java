@@ -59,7 +59,7 @@ public class CustomizedSandwich extends BaseSandwich {
     }
 
     @Override
-    public String toString() {
+    public String getDescription() {
         StringBuilder sb = new StringBuilder();
         sb.append("Customized Sandwich (").append(size).append("\", ").append(bread);
         sb.append(toasted ? ", toasted):" : ", not toasted):");
