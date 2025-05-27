@@ -59,38 +59,38 @@ public class CustomizedSandwich extends BaseSandwich {
     }
 
     @Override
-    public String getDescription() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Customized Sandwich (").append(size).append("\", ").append(bread);
-        sb.append(toasted ? ", toasted):" : ", not toasted):");
-        sb.append("\n");
+    public String toString() {
+        StringBuilder description = new StringBuilder();
+        description.append("Customized Sandwich (").append(size).append("\", ").append(bread);
+        description.append(toasted ? ", toasted):" : ", not toasted):");
+        description.append("\n");
 
         if (!meats.isEmpty()) {
-            sb.append("  Meats: ");
-            meats.forEach(m -> sb.append(m.toString()).append(", "));
-            sb.setLength(sb.length() - 2); // remove last comma
-            sb.append("\n");
+            description.append("  Meats: ");
+            meats.forEach(m -> description.append(m.toString()).append(", "));
+            description.setLength(description.length() - 2); // remove last comma
+            description.append("\n");
         }
         if (!cheeses.isEmpty()) {
-            sb.append("  Cheeses: ");
-            cheeses.forEach(c -> sb.append(c.toString()).append(", "));
-            sb.setLength(sb.length() - 2);
-            sb.append("\n");
+            description.append("  Cheeses: ");
+            cheeses.forEach(c -> description.append(c.toString()).append(", "));
+            description.setLength(description.length() - 2);
+            description.append("\n");
         }
         if (!regularToppings.isEmpty()) {
-            sb.append("  Toppings: ");
-            regularToppings.forEach(r -> sb.append(r.toString()).append(", "));
-            sb.setLength(sb.length() - 2);
-            sb.append("\n");
+            description.append("  Toppings: ");
+            regularToppings.forEach(r -> description.append(r.toString()).append(", "));
+            description.setLength(description.length() - 2);
+            description.append("\n");
         }
         if (!sauces.isEmpty()) {
-            sb.append("  Sauces: ");
-            sauces.forEach(s -> sb.append(s.toString()).append(", "));
-            sb.setLength(sb.length() - 2);
-            sb.append("\n");
+            description.append("  Sauces: ");
+            sauces.forEach(s -> description.append(s.toString()).append(", "));
+            description.setLength(description.length() - 2);
+            description.append("\n");
         }
 
-        sb.append(String.format("  Total: $%.2f", getCost()));
-        return sb.toString();
+        description.append(String.format("  Total: $%.2f", getCost()));
+        return description.toString();
     }
 }

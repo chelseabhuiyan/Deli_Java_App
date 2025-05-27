@@ -10,6 +10,9 @@ public abstract class BaseSandwich implements MenuItem {
 
     //constructor
     public BaseSandwich(SandwichSize size, BreadType bread, boolean toasted) {
+        if (size == null || bread == null) {
+            throw new IllegalArgumentException("Size and bread cannot be null.");
+        }
         this.size = size;
         this.bread = bread;
         this.toasted = toasted;
@@ -28,9 +31,11 @@ public abstract class BaseSandwich implements MenuItem {
         return toasted;
     }
 
+
     // These must be implemented by subclasses
     public abstract double getCost();
-    public abstract String getDescription();
+    public abstract String toString(); //returns description of the sandwich
+
 }
 
 
