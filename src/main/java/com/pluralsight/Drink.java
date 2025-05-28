@@ -3,7 +3,7 @@ package com.pluralsight;
 import com.pluralsight.enums.DrinkName;
 import com.pluralsight.enums.DrinkSize;
 
-public class Drink {
+public class Drink implements MenuItem {
     private DrinkName name;
     private DrinkSize size;
 

@@ -2,27 +2,24 @@ package com.pluralsight;
 
 import com.pluralsight.enums.SidesType;
 
+public class Sides implements MenuItem {
+    private SidesType name;
 
-public class Sides {
-    private SidesType type;
-
-    // Constructor
-    public Sides(SidesType type) {
-        this.type = type;
+    public Sides(SidesType name) {
+        this.name = name;
     }
 
-    // Getter
-    public SidesType getType() {
-        return type;
+    public SidesType getName() {
+        return name;
     }
 
-    // Since sides are included, the cost is always zero
+    @Override
     public double getCost() {
-        return 0.0;
+        return 3.00;
     }
 
     @Override
     public String toString() {
-        return type.toString().replace('_', ' ');
+        return name + " Side - $" + String.format("%.2f", getCost());
     }
 }

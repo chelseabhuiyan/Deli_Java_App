@@ -2,7 +2,7 @@ package com.pluralsight;
 
 import com.pluralsight.enums.ChipName;
 
-public class Chip {
+public class Chip implements MenuItem {
     private ChipName name;
 
     public Chip(ChipName name) {
