@@ -55,6 +55,13 @@ public class CustomizedSandwich extends BaseSandwich {
         return all;
     }
 
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
+    }
+
+
+
+
     //Overrides the abstract getCost from BaseSandwich
     @Override
     public double getCost() {
@@ -73,6 +80,7 @@ public class CustomizedSandwich extends BaseSandwich {
 
         return basePrice + toppingCost;
     }
+
 
     //uses string.join and stream
     @Override

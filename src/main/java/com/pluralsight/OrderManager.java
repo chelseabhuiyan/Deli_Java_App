@@ -21,13 +21,13 @@ public class OrderManager {
 
             switch (choice) {
                 case "1":
-                    SandwichBuilder.buildSandwich(scanner, currentOrder);
+                    BuildSandwich.createSandwich(scanner, currentOrder);
                     break;
                 case "2":
-                    ExtrasBuilder.addDrink(scanner, currentOrder);
+                   // OrderDrink.addDrink(scanner, currentOrder);
                     break;
                 case "3":
-                    ExtrasBuilder.addChip(scanner, currentOrder);
+                   // OrderChips.addChip(scanner, currentOrder);
                     break;
                 case "4":
                     checkoutOrder(scanner);
