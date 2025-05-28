@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+    private final LocalDateTime orderTime = LocalDateTime.now(); //  Track when order was created
+
     private List<BaseSandwich> sandwiches = new ArrayList<>();
     private List<Drink> drinks = new ArrayList<>();
     private List<Chip> chips = new ArrayList<>();
     private List<Sides> sides = new ArrayList<>();
 
-    // Add items
     public void addSandwich(BaseSandwich sandwich) {
         if (sandwich != null) sandwiches.add(sandwich);
     }
@@ -31,7 +32,6 @@ public class Order {
         if (side != null) sides.add(side);
     }
 
-    // Calculate total cost
     public double getTotalCost() {
         double total = 0.0;
         for (BaseSandwich s : sandwiches) total += s.getCost();
@@ -41,10 +41,15 @@ public class Order {
         return total;
     }
 
-    // Generate receipt string
+    //  Helper method to reuse formatted timestamp
+    public String getFormattedTimestamp() {
+        return orderTime.format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+    }
+
     public String getReceipt() {
         StringBuilder receipt = new StringBuilder();
         receipt.append("Order Receipt\n");
+        receipt.append("Timestamp: ").append(getFormattedTimestamp()).append("\n"); //  Add timestamp to receipt
         receipt.append("-------------\n");
 
         if (!sandwiches.isEmpty()) {
@@ -71,26 +76,29 @@ public class Order {
         return receipt.toString();
     }
 
-    // Save receipt to file with timestamped filename
-    public void saveReceipt() throws IOException {
+    public void saveReceipt() {
         String folderName = "receipts";
         File folder = new File(folderName);
-        if (!folder.exists()) folder.mkdir(); //if folder doesn't exit create it
+        if (!folder.exists()) folder.mkdir();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
-        String timestamp = LocalDateTime.now().format(formatter);
-        String filename = folderName + "/" + timestamp + ".txt";
+        String filename = folderName + "/" + getFormattedTimestamp() + ".txt"; //saves the receipt wit the time stamp
 
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write(getReceipt());
+        } catch (IOException e) {
+            System.out.println("Failed to save receipt: " + e.getMessage());
         }
     }
 
-    // Clear order (for cancel or after checkout)
     public void clear() {
         sandwiches.clear();
         drinks.clear();
         chips.clear();
         sides.clear();
+    }
+
+    @Override
+    public String toString() {
+        return getReceipt();
     }
 }
