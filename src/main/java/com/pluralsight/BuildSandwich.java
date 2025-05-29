@@ -35,8 +35,28 @@ public class BuildSandwich {
             sandwich.setToasted(true);
         }
 
-        order.addSandwich(sandwich);
+        order.addItem(sandwich);
         System.out.println("Sandwich added to your order!");
+
+        // Ask about sides
+        System.out.print("Would you like to add a side? (YES/NO): ");
+        String sideAnswer = scanner.nextLine().trim().toUpperCase();
+
+        if (sideAnswer.equals("YES")) {
+            System.out.println("Available sides:");
+            for (SidesType side : SidesType.values()) {
+                System.out.println("- " + side);
+            }
+
+            System.out.print("Choose a side: ");
+            try {
+                SidesType selectedSide = SidesType.valueOf(scanner.nextLine().trim().toUpperCase());
+                order.addItem(new Sides(selectedSide));
+                System.out.println("Side added to your order!");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid side selected. Skipping...");
+            }
+        }
     }
 
     private static SandwichSize promptSize(Scanner scanner) {

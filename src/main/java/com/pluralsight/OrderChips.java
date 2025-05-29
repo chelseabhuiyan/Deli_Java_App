@@ -25,7 +25,7 @@ public class OrderChips {
 
         // Create and add chip to order
         Chip chip = new Chip(selectedChip);
-        order.addChip(chip);
+        order.addItem(chip);
         System.out.println("Chips were added to your order!");
     }
 }

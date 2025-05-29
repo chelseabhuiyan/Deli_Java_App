@@ -9,39 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private final LocalDateTime orderTime = LocalDateTime.now(); //  Track when order was created
+    private final LocalDateTime orderTime = LocalDateTime.now(); // Track when order was created
 
-    private List<BaseSandwich> sandwiches = new ArrayList<>();
-    private List<Drink> drinks = new ArrayList<>();
-    private List<Chip> chips = new ArrayList<>();
-    private List<Sides> sides = new ArrayList<>();
+    private List<MenuItem> items = new ArrayList<>();
 
-    public void addSandwich(BaseSandwich sandwich) {
-        if (sandwich != null) sandwiches.add(sandwich);
-    }
-
-    public void addDrink(Drink drink) {
-        if (drink != null) drinks.add(drink);
-    }
-
-    public void addChip(Chip chip) {
-        if (chip != null) chips.add(chip);
-    }
-
-    public void addSide(Sides side) {
-        if (side != null) sides.add(side);
+    public void addItem(MenuItem item) {
+        if (item != null) {
+            items.add(item);
+        }
     }
 
     public double getTotalCost() {
-        double total = 0.0;
-        for (BaseSandwich s : sandwiches) total += s.getCost();
-        for (Drink d : drinks) total += d.getCost();
-        for (Chip c : chips) total += c.getCost();
-        for (Sides s : sides) total += s.getCost();
-        return total;
+        return items.stream().mapToDouble(MenuItem::getCost).sum();
     }
 
-    //  Helper method to reuse formatted timestamp
+    // Helper method to reuse formatted timestamp
     public String getFormattedTimestamp() {
         return orderTime.format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
     }
@@ -49,27 +31,11 @@ public class Order {
     public String getReceipt() {
         StringBuilder receipt = new StringBuilder();
         receipt.append("Order Receipt\n");
-        receipt.append("Timestamp: ").append(getFormattedTimestamp()).append("\n"); //  Add timestamp to receipt
+        receipt.append("Timestamp: ").append(getFormattedTimestamp()).append("\n");
         receipt.append("-------------\n");
 
-        if (!sandwiches.isEmpty()) {
-            receipt.append("Sandwiches:\n");
-            sandwiches.forEach(s -> receipt.append(s.toString()).append("\n"));
-        }
-
-        if (!drinks.isEmpty()) {
-            receipt.append("Drinks:\n");
-            drinks.forEach(d -> receipt.append(d.toString()).append("\n"));
-        }
-
-        if (!chips.isEmpty()) {
-            receipt.append("Chips:\n");
-            chips.forEach(c -> receipt.append(c.toString()).append("\n"));
-        }
-
-        if (!sides.isEmpty()) {
-            receipt.append("Sides:\n");
-            sides.forEach(s -> receipt.append(s.toString()).append("\n"));
+        for (MenuItem item : items) {
+            receipt.append(item.toString()).append("\n");
         }
 
         receipt.append(String.format("\nTotal: $%.2f\n", getTotalCost()));
@@ -79,9 +45,9 @@ public class Order {
     public void saveReceipt() {
         String folderName = "receipts";
         File folder = new File(folderName);
-        if (!folder.exists()) folder.mkdir();
+        if (!folder.exists()) folder.mkdirs();
 
-        String filename = folderName + "/" + getFormattedTimestamp() + ".txt"; //saves the receipt wit the time stamp
+        String filename = folderName + "/" + getFormattedTimestamp() + ".txt";
 
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write(getReceipt());
@@ -91,10 +57,7 @@ public class Order {
     }
 
     public void clear() {
-        sandwiches.clear();
-        drinks.clear();
-        chips.clear();
-        sides.clear();
+        items.clear();
     }
 
     @Override

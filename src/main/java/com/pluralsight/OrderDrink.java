@@ -40,7 +40,7 @@ public class OrderDrink {
 
         // Create and add to order
         Drink drink = new Drink(selectedName, selectedSize);
-        order.addDrink(drink);
+        order.addItem(drink);
         System.out.println("The drink was added to your order!");
     }
 }

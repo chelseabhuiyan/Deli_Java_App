@@ -21,13 +21,13 @@ public class OrderManager {
 
             switch (choice) {
                 case "1":
-                    BuildSandwich.createSandwich(scanner, currentOrder);
+                    BuildSandwich.createSandwich(scanner, currentOrder); // adds item using addItem()
                     break;
                 case "2":
-                    OrderDrink.addDrink(scanner, currentOrder);
+                    OrderDrink.addDrink(scanner, currentOrder); // adds item using addItem()
                     break;
                 case "3":
-                    OrderChips.addChip(scanner, currentOrder);
+                    OrderChips.addChip(scanner, currentOrder); // adds item using addItem()
                     break;
                 case "4":
                     checkoutOrder(scanner);
@@ -45,8 +45,7 @@ public class OrderManager {
 
     private void checkoutOrder(Scanner scanner) {
         System.out.println("\n--- Checkout ---");
-        System.out.println(currentOrder);
-        System.out.printf("Total: $%.2f\n", currentOrder.getTotalCost());
+        System.out.println(currentOrder); // calls toString() -> formatted receipt
 
         System.out.print("Confirm order? (YES/NO): ");
         String confirm = scanner.nextLine().trim().toUpperCase();

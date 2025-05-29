@@ -1,0 +1,11 @@
+Order Receipt
+Timestamp: 20250529-023304
+-------------
+Customized Sandwich (FOUR", WHITE, toasted):
+  Meats: Chicken
+  Cheeses: Extra American
+  Toppings: Peppers
+  Sauces: Mayo
+  Total: $6.80
+
+Total: $6.80
