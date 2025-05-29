@@ -7,24 +7,28 @@ import com.pluralsight.enums.ToppingType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomizedSandwich extends BaseSandwich {
+public class CustomizedSandwich implements MenuItem {
+    private SandwichSize size;
+    private BreadType bread;
+    private boolean toasted;
+
     private List<Topping> meats = new ArrayList<>();
     private List<Topping> cheeses = new ArrayList<>();
     private List<Topping> regularToppings = new ArrayList<>();
     private List<Topping> sauces = new ArrayList<>();
 
-
-    //Constructor
+    // Constructor
     public CustomizedSandwich(SandwichSize size, BreadType bread, boolean toasted) {
-        super(size, bread, toasted);
+        this.size = size;
+        this.bread = bread;
+        this.toasted = toasted;
     }
 
-    //Method to add topping to the right list
+    // Method to add topping to the right list
     public void addTopping(Topping topping) {
-        if (topping == null || topping.getType() == null)
-        {return;}
+        if (topping == null || topping.getType() == null) return;
 
-        switch (topping.getType()) { //switch uses ToppingType to decide which list the topping goes into
+        switch (topping.getType()) {
             case MEAT -> meats.add(topping);
             case CHEESE -> cheeses.add(topping);
             case REGULAR -> regularToppings.add(topping);
@@ -32,10 +36,9 @@ public class CustomizedSandwich extends BaseSandwich {
         }
     }
 
-    //Method to remove toppings
+    // Method to remove toppings
     public void removeTopping(Topping topping) {
-        if (topping == null || topping.getType() == null)
-        {return;}
+        if (topping == null || topping.getType() == null) return;
 
         switch (topping.getType()) {
             case MEAT -> meats.remove(topping);
@@ -45,7 +48,7 @@ public class CustomizedSandwich extends BaseSandwich {
         }
     }
 
-    //helper method combines all the toppings into one list
+    // Combine all toppings into one list
     public List<Topping> getAllToppings() {
         List<Topping> all = new ArrayList<>();
         all.addAll(meats);
@@ -59,21 +62,28 @@ public class CustomizedSandwich extends BaseSandwich {
         this.toasted = toasted;
     }
 
+    public SandwichSize getSize() {
+        return size;
+    }
 
+    public BreadType getBread() {
+        return bread;
+    }
 
+    public boolean isToasted() {
+        return toasted;
+    }
 
-    //Overrides the abstract getCost from BaseSandwich
+    // Implements cost calculation
     @Override
     public double getCost() {
-        double basePrice = switch (size) {  //sets base sandwich price based on the size
+        double basePrice = switch (size) {
             case FOUR -> 5.50;
             case EIGHT -> 7.00;
             case TWELVE -> 8.50;
         };
 
         double toppingCost = 0.0;
-
-        //loops over all toppings to add up the cost based on size and extras ordered
         for (Topping t : getAllToppings()) {
             toppingCost += t.getCost(size);
         }
@@ -81,14 +91,12 @@ public class CustomizedSandwich extends BaseSandwich {
         return basePrice + toppingCost;
     }
 
-
-    //uses string.join and stream
+    // toString() override
     @Override
     public String toString() {
         StringBuilder description = new StringBuilder();
         description.append("Customized Sandwich (").append(size).append("\", ").append(bread);
-        description.append(toasted ? ", toasted):" : ", not toasted):");
-        description.append("\n");
+        description.append(toasted ? ", toasted):" : ", not toasted):").append("\n");
 
         if (!meats.isEmpty()) {
             description.append("  Meats: ")

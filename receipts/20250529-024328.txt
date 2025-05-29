@@ -1,0 +1,10 @@
+Order Receipt
+Timestamp: 20250529-024328
+-------------
+Customized Sandwich (FOUR", WHITE, not toasted):
+  Meats: Steak
+  Sauces: Mayo
+  Total: $6.50
+SAUCE Side - $3.00
+
+Total: $9.50

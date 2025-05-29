@@ -8,15 +8,19 @@ import com.pluralsight.enums.ToppingType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignatureSandwich extends BaseSandwich {
-    private final String name; //name of the signature sandwich
-    private final List<Topping> toppings = new ArrayList<>(); //a list holds all the toppings in the signature sandwich
+public class SignatureSandwich implements MenuItem {
+    private final String name;
+    private final SandwichSize size;
+    private final BreadType bread;
+    private final boolean toasted;
+    private final List<Topping> toppings = new ArrayList<>();
 
     public SignatureSandwich(String name, SandwichSize size, BreadType bread, boolean toasted) {
-        super(size, bread, toasted);  ////Calls the BaseSandwich to set the bread type, size, and toasted
         this.name = name;
+        this.size = size;
+        this.bread = bread;
+        this.toasted = toasted;
 
-        // Initialize toppings based on the sandwich name
         switch (name.toLowerCase()) {
             case "italian sub" -> initItalianSub();
             case "veggie delight" -> initVeggieDelight();
@@ -26,68 +30,46 @@ public class SignatureSandwich extends BaseSandwich {
     }
 
     private void initItalianSub() {
-        // Add meats
         toppings.add(new Topping(ToppingName.HAM, ToppingType.MEAT, false));
         toppings.add(new Topping(ToppingName.SALAMI, ToppingType.MEAT, false));
         toppings.add(new Topping(ToppingName.BACON, ToppingType.MEAT, false));
-
-        // Cheeses
         toppings.add(new Topping(ToppingName.PROVOLONE, ToppingType.CHEESE, false));
-
-        // Regular Toppings
         toppings.add(new Topping(ToppingName.LETTUCE, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.TOMATOES, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.ONIONS, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.PEPPERS, ToppingType.REGULAR, false));
-
-        // Sauces
         toppings.add(new Topping(ToppingName.RANCH, ToppingType.SAUCE, false));
     }
 
     private void initVeggieDelight() {
-        // No meats
-        // Cheeses
         toppings.add(new Topping(ToppingName.SWISS, ToppingType.CHEESE, false));
-
-        // Regular Toppings
         toppings.add(new Topping(ToppingName.LETTUCE, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.TOMATOES, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.ONIONS, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.CUCUMBERS, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.PEPPERS, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.PICKLES, ToppingType.REGULAR, false));
-
-        // Sauces
         toppings.add(new Topping(ToppingName.MUSTARD, ToppingType.SAUCE, false));
     }
 
     private void initChickenCutlet() {
-        // Meats
         toppings.add(new Topping(ToppingName.CHICKEN, ToppingType.MEAT, false));
-
-        // Cheeses
         toppings.add(new Topping(ToppingName.PROVOLONE, ToppingType.CHEESE, false));
-
-        // Regular Toppings
         toppings.add(new Topping(ToppingName.LETTUCE, ToppingType.REGULAR, false));
         toppings.add(new Topping(ToppingName.TOMATOES, ToppingType.REGULAR, false));
-        toppings.add(new Topping(ToppingName.MAYO, ToppingType.SAUCE, false));  // mayo as sauce
-
-        // You can add more toppings or sauces as desired
+        toppings.add(new Topping(ToppingName.MAYO, ToppingType.SAUCE, false));
     }
 
-    //Getters
     public String getName() {
-        return name; //returns sandwich name
+        return name;
     }
 
     public List<Topping> getToppings() {
-        return new ArrayList<>(toppings); //returns copy of the topping list
+        return new ArrayList<>(toppings);
     }
 
     @Override
     public double getCost() {
-        // Base prices same as CustomizedSandwich for consistency
         double basePrice = switch (size) {
             case FOUR -> 5.50;
             case EIGHT -> 7.00;
@@ -108,7 +90,6 @@ public class SignatureSandwich extends BaseSandwich {
         description.append(name).append(" (").append(size).append("\", ").append(bread);
         description.append(toasted ? ", toasted):" : ", not toasted):").append("\n");
 
-        // Group toppings by type for nicer formatting
         StringBuilder meats = new StringBuilder();
         StringBuilder cheeses = new StringBuilder();
         StringBuilder regulars = new StringBuilder();
@@ -123,18 +104,14 @@ public class SignatureSandwich extends BaseSandwich {
             }
         }
 
-        if (meats.length() > 0) {
+        if (meats.length() > 0)
             description.append("  Meats: ").append(meats, 0, meats.length() - 2).append("\n");
-        }
-        if (cheeses.length() > 0) {
+        if (cheeses.length() > 0)
             description.append("  Cheeses: ").append(cheeses, 0, cheeses.length() - 2).append("\n");
-        }
-        if (regulars.length() > 0) {
+        if (regulars.length() > 0)
             description.append("  Toppings: ").append(regulars, 0, regulars.length() - 2).append("\n");
-        }
-        if (sauces.length() > 0) {
+        if (sauces.length() > 0)
             description.append("  Sauces: ").append(sauces, 0, sauces.length() - 2).append("\n");
-        }
 
         description.append(String.format("  Total: $%.2f", getCost()));
 
