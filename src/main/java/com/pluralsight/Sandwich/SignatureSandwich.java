@@ -64,6 +64,16 @@ public class SignatureSandwich implements MenuItem {
     public List<Topping> getToppings() {
         return new ArrayList<>(toppings);
     }
+    public SandwichSize getSize() {
+        return size;
+    }
+    public BreadType getBread() {
+        return bread;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
 
     @Override
     public double getCost() {

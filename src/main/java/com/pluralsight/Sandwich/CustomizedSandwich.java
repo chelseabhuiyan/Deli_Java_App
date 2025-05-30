@@ -72,6 +72,11 @@ public class CustomizedSandwich implements MenuItem {
         return toasted;
     }
 
+    public List<Topping> getMeats()      { return meats; }
+    public List<Topping> getCheeses()    { return cheeses; }
+    public List<Topping> getRegularToppings() { return regularToppings; }
+    public List<Topping> getSauces()     { return sauces; }
+
     // Implements cost calculation
     @Override
     public double getCost() {

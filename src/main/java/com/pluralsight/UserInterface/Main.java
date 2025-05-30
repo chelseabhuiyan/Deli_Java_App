@@ -9,7 +9,7 @@ public class Main {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n ----DELI-cious Sandwich Shop---- ");
+            System.out.println("\n ----Deli_Java Sandwich Shop---- ");
             System.out.println("1) New Order");
             System.out.println("0) Exit");
             System.out.print("Select an option: ");
@@ -20,7 +20,7 @@ public class Main {
                     orderManager.startNewOrder(scanner);
                     break;
                 case "0":
-                    System.out.println("Thank you for visiting DELI-cious Sandwich Shop! See you again!");
+                    System.out.println("Thank you for visiting Deli_Java Sandwich Shop! See you again!");
                     running = false;
                     break;
                 default:

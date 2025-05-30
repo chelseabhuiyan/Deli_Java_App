@@ -16,67 +16,87 @@ public class BuildSandwich {
         BreadType bread = promptBread(scanner);
         CustomizedSandwich sandwich = new CustomizedSandwich(size, bread, false); // default toasted = false
 
-        // Regular Toppings
-        List<ToppingName> regularToppings = getToppingsByType(ToppingType.REGULAR);
-        addToppings(scanner, sandwich, regularToppings, "regular");
+        // Toppings by category
+        addToppings(scanner, sandwich, getToppingsByType(ToppingType.REGULAR), "regular");
+        addToppings(scanner, sandwich, getToppingsByType(ToppingType.MEAT), "meat");
+        addToppings(scanner, sandwich, getToppingsByType(ToppingType.CHEESE), "cheese");
+        addToppings(scanner, sandwich, getToppingsByType(ToppingType.SAUCE), "sauce");
 
-        // Meats
-        List<ToppingName> meats = getToppingsByType(ToppingType.MEAT);
-        addToppings(scanner, sandwich, meats, "meat");
-
-        // Cheeses
-        List<ToppingName> cheeses = getToppingsByType(ToppingType.CHEESE);
-        addToppings(scanner, sandwich, cheeses, "cheese");
-
-        // Sauces
-        List<ToppingName> sauces = getToppingsByType(ToppingType.SAUCE);
-        addToppings(scanner, sandwich, sauces, "sauce");
-
-        // Toasted?
-        System.out.print("Would you like it toasted? (YES/NO): ");
-        String toastedInput = scanner.nextLine().trim().toUpperCase();
-        if (toastedInput.equals("YES")) {
+        // Toasted option
+        System.out.println("Would you like it toasted?");
+        System.out.println("1) Yes\n2) No");
+        System.out.print("Enter your choice: ");
+        String toastedInput = scanner.nextLine().trim();
+        if (toastedInput.equals("1")) {
             sandwich.setToasted(true);
         }
 
         order.addItem(sandwich);
         System.out.println("Sandwich added to your order!");
 
-        // Ask about sides
-        System.out.print("Would you like to add a side? (YES/NO): ");
-        String sideAnswer = scanner.nextLine().trim().toUpperCase();
+        // Add side
+        System.out.print("Would you like to add a side?\n1) Yes\n2) No\nEnter your choice: ");
+        String sideAnswer = scanner.nextLine().trim();
 
-        if (sideAnswer.equals("YES")) {
+        if (sideAnswer.equals("1")) {
+            SidesType[] sidesOptions = SidesType.values();
             System.out.println("Available sides:");
-            for (SidesType side : SidesType.values()) {
-                System.out.println("- " + side);
+            for (int i = 0; i < sidesOptions.length; i++) {
+                System.out.println((i + 1) + ") " + sidesOptions[i]);
             }
 
-            System.out.print("Choose a side: ");
+            System.out.print("Choose a side by number: ");
             try {
-                SidesType selectedSide = SidesType.valueOf(scanner.nextLine().trim().toUpperCase());
-                order.addItem(new Sides(selectedSide));
-                System.out.println("Side added to your order!");
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid side selected. Skipping...");
+                int sideChoice = Integer.parseInt(scanner.nextLine().trim());
+                if (sideChoice >= 1 && sideChoice <= sidesOptions.length) {
+                    SidesType selectedSide = sidesOptions[sideChoice - 1];
+                    order.addItem(new Sides(selectedSide));
+                    System.out.println("Side added to your order!");
+                } else {
+                    System.out.println("Invalid side number. Skipping...");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Skipping side...");
             }
         }
     }
 
     private static SandwichSize promptSize(Scanner scanner) {
+        SandwichSize[] sizes = SandwichSize.values();
         System.out.println("Choose sandwich size:");
-        for (SandwichSize size : SandwichSize.values()) {
-            System.out.println("- " + size);
+        for (int i = 0; i < sizes.length; i++) {
+            System.out.println((i + 1) + ") " + sizes[i]);
         }
-        return SandwichSize.valueOf(scanner.nextLine().trim().toUpperCase());
+
+        while (true) {
+            System.out.print("Enter your choice: ");
+            try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
+                if (choice >= 1 && choice <= sizes.length) {
+                    return sizes[choice - 1];
+                }
+            } catch (NumberFormatException e) {}
+            System.out.println("Invalid choice. Please try again.");
+        }
     }
 
     private static BreadType promptBread(Scanner scanner) {
+        BreadType[] breads = BreadType.values();
         System.out.println("Choose bread type:");
-        for (BreadType bread : BreadType.values()) {
-            System.out.println("- " + bread);
+        for (int i = 0; i < breads.length; i++) {
+            System.out.println((i + 1) + ") " + breads[i]);
         }
-        return BreadType.valueOf(scanner.nextLine().trim().toUpperCase());
+
+        while (true) {
+            System.out.print("Enter your choice: ");
+            try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
+                if (choice >= 1 && choice <= breads.length) {
+                    return breads[choice - 1];
+                }
+            } catch (NumberFormatException e) {}
+            System.out.println("Invalid choice. Please try again.");
+        }
     }
 
     private static List<ToppingName> getToppingsByType(ToppingType type) {
@@ -86,17 +106,29 @@ public class BuildSandwich {
     }
 
     private static void addToppings(Scanner scanner, CustomizedSandwich sandwich, List<ToppingName> options, String category) {
-        System.out.println("Choose " + category + " toppings (comma-separated, e.g. HAM,CHEESE):");
-        System.out.println("Options: " + options.stream().map(Enum::name).collect(Collectors.joining(", ")));
-        String input = scanner.nextLine().trim().toUpperCase();
-        String[] selected = input.split(",");
+        System.out.println("Choose " + category + " toppings:");
+        for (int i = 0; i < options.size(); i++) {
+            System.out.println((i + 1) + ") " + options.get(i));
+        }
+        System.out.println("0) None");
+        System.out.print("Enter your choices (comma-separated numbers): ");
+        String input = scanner.nextLine().trim();
+        String[] selectedIndices = input.split(",");
 
-        for (String name : selected) {
+        for (String indexStr : selectedIndices) {
             try {
-                ToppingName topping = ToppingName.valueOf(name);
-                ToppingType type = topping.getType();
+                int index = Integer.parseInt(indexStr.trim());
 
+                if (index == 0) continue; // skip if they chose "none"
+                if (index < 1 || index > options.size()) {
+                    System.out.println("Invalid option: " + index);
+                    continue;
+                }
+
+                ToppingName topping = options.get(index - 1);
+                ToppingType type = topping.getType();
                 boolean isExtra = false;
+
                 if (type == ToppingType.MEAT || type == ToppingType.CHEESE) {
                     System.out.print("Do you want extra " + topping + "? (YES/NO): ");
                     String extraInput = scanner.nextLine().trim().toUpperCase();
@@ -104,8 +136,9 @@ public class BuildSandwich {
                 }
 
                 sandwich.addTopping(new Topping(topping, type, isExtra));
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid topping: " + name);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input: " + indexStr);
             }
         }
     }
