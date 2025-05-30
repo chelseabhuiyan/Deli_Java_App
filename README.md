@@ -6,6 +6,9 @@
 
 ---
 
+## Class Diagram
+[ClassDiagram](ClassDiagram/SubHub_ClassDiagram%20(1).png)
+
 ##  Features
 
 - **Customized Sandwiches**
