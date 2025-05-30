@@ -40,6 +40,7 @@
  - During sandwich customization, users can opt to skip any category (e.g., meats, cheeses, sauces) by choosing "none".
  - Added color to the user interface for better visiblity of different sections
  - Allow users to choose bread type, and size for signiature sandwich
+ - Used Streams, Inheritance, Interfaces, and Polymorphism
 
 ## Technology Stack and Tools
 
@@ -83,3 +84,23 @@
 
 
 ## Interesting Peice of Code
+
+````Java
+public String getReceipt() {
+    StringBuilder r = new StringBuilder();
+    r.append("===== Order #").append(orderNumber).append(" =====\n")
+     .append("Time: ").append(getFormattedTimestamp()).append("\n\n");
+
+    for (MenuItem item : items) {
+        r.append(item.toString()).append("\n\n"); // Polymorphic toString()
+    }
+
+    r.append("------------------------------\n")
+     .append(String.format("Total: $%.2f\n", getTotalCost()))
+     .append("--------------------------\n");
+
+    return r.toString();
+}
+
+````
+### This piece of code is a strong example of polymorphism in action. The Order class maintains a list of items, all of which implement the MenuItem interface. By treating all items similarly as MenuItem objects, the code can dynamically call the correct toString() and getCost() methods based on the actual type of item, whether it's a Drink, Chip, SignatureSandwich, or any other subclass. This allows the receipt generation and total cost calculation to remain clean, extensible, and maintainable without requiring type checks or casting. Additionally, the getTotalCost() method showcases Java Stream API usage to sum the costs of all items in the order. Overall, design pattern allows the code to be reuseable making it easy to extend functionality like adding new item types in the future with minimal code changes.
