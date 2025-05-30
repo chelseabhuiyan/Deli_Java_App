@@ -1,0 +1,17 @@
+===== Order #2 =====
+Time: 20250530-022620
+
+Customized Sandwich (FOUR", WHITE, toasted) - $5.50
+Meats:
+  - STEAK - $0.50
+    + Extra meat - $-0.50
+Cheeses:
+  - AMERICAN - $0.75
+Toppings (Included): LETTUCE
+Sauces (Included): MAYO
+
+AU_JUS Side - $3.00
+
+------------------------------
+Total: $9.75
+--------------------------

@@ -1,5 +1,6 @@
 package com.pluralsight.Drinks;
 
+import com.pluralsight.ColorText;
 import com.pluralsight.MenuItem;
 
 public class Drink implements MenuItem {
@@ -38,6 +39,7 @@ public class Drink implements MenuItem {
 
     @Override
     public String toString() {
-        return size + " " + name.toString().replace('_', ' ') + " ($" + String.format("%.2f", getCost()) + ")";
+        String formattedName = name.toString().replace('_', ' ');
+        return ColorText.CYAN + size + " " + formattedName + " ($" + String.format("%.2f", getCost()) + ")" + ColorText.RESET;
     }
 }

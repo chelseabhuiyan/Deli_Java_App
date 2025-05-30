@@ -1,7 +1,7 @@
 package com.pluralsight.Sandwich;
 
 import com.pluralsight.MenuItem;
-
+import com.pluralsight.ColorText;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +64,11 @@ public class SignatureSandwich implements MenuItem {
     public List<Topping> getToppings() {
         return new ArrayList<>(toppings);
     }
+
     public SandwichSize getSize() {
         return size;
     }
+
     public BreadType getBread() {
         return bread;
     }
@@ -94,9 +96,13 @@ public class SignatureSandwich implements MenuItem {
     @Override
     public String toString() {
         StringBuilder description = new StringBuilder();
-        description.append(name).append(" (").append(size).append("\", ").append(bread);
-        description.append(toasted ? ", toasted):" : ", not toasted):").append("\n");
 
+        // Base sandwich line in WHITE
+        description.append(ColorText.WHITE)
+                .append(name).append(" (").append(size).append("\", ").append(bread);
+        description.append(toasted ? ", toasted):\n" : ", not toasted):\n");
+
+        // Prepare colored topping sections
         StringBuilder meats = new StringBuilder();
         StringBuilder cheeses = new StringBuilder();
         StringBuilder regulars = new StringBuilder();
@@ -112,16 +118,31 @@ public class SignatureSandwich implements MenuItem {
         }
 
         if (meats.length() > 0)
-            description.append("  Meats: ").append(meats, 0, meats.length() - 2).append("\n");
-        if (cheeses.length() > 0)
-            description.append("  Cheeses: ").append(cheeses, 0, cheeses.length() - 2).append("\n");
-        if (regulars.length() > 0)
-            description.append("  Toppings: ").append(regulars, 0, regulars.length() - 2).append("\n");
-        if (sauces.length() > 0)
-            description.append("  Sauces: ").append(sauces, 0, sauces.length() - 2).append("\n");
+            description.append(ColorText.YELLOW)
+                    .append("  Meats: ")
+                    .append(meats, 0, meats.length() - 2).append("\n");
 
-        description.append(String.format("  Total: $%.2f", getCost()));
+        if (cheeses.length() > 0)
+            description.append(ColorText.YELLOW)
+                    .append("  Cheeses: ")
+                    .append(cheeses, 0, cheeses.length() - 2).append("\n");
+
+        if (regulars.length() > 0)
+            description.append(ColorText.YELLOW)
+                    .append("  Toppings: ")
+                    .append(regulars, 0, regulars.length() - 2).append("\n");
+
+        if (sauces.length() > 0)
+            description.append(ColorText.YELLOW)
+                    .append("  Sauces: ")
+                    .append(sauces, 0, sauces.length() - 2).append("\n");
+
+        // Add total in GREEN
+        description.append(ColorText.GREEN)
+                .append(String.format("  Total: $%.2f", getCost()))
+                .append(ColorText.RESET);
 
         return description.toString();
     }
+
 }

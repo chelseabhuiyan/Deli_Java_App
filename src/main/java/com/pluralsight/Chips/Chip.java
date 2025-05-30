@@ -1,5 +1,6 @@
 package com.pluralsight.Chips;
 
+import com.pluralsight.ColorText;
 import com.pluralsight.MenuItem;
 
 public class Chip implements MenuItem {
@@ -17,7 +18,7 @@ public class Chip implements MenuItem {
         this.name = name;
     }
 
-    // Fixed cost for all chips (can be changed if needed)
+    // Fixed cost for all chips
     public double getCost() {
         return 1.50;
     }
@@ -25,6 +26,7 @@ public class Chip implements MenuItem {
     @Override
     public String toString() {
         // Format enum name with spaces instead of underscores (if any)
-        return name.toString().replace('_', ' ') + " ($" + String.format("%.2f", getCost()) + ")";
+        String formattedName = name.toString().replace('_', ' ');
+        return ColorText.CYAN + formattedName + " ($" + String.format("%.2f", getCost()) + ")" + ColorText.RESET;
     }
 }

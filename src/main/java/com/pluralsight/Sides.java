@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import com.pluralsight.ColorText;
+
 public class Sides implements MenuItem {
     private SidesType name;
 
@@ -18,6 +20,6 @@ public class Sides implements MenuItem {
 
     @Override
     public String toString() {
-        return name + " Side - $" + String.format("%.2f", getCost());
+        return ColorText.CYAN + name + " Side - $" + String.format("%.2f", getCost()) + ColorText.RESET;
     }
 }
