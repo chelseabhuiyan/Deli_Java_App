@@ -1,6 +1,8 @@
-package com.pluralsight;
+package com.pluralsight.UserInterface;
 
-import com.pluralsight.enums.ChipName;
+import com.pluralsight.Chips.Chip;
+import com.pluralsight.Order;
+import com.pluralsight.Chips.ChipName;
 
 import java.util.Scanner;
 

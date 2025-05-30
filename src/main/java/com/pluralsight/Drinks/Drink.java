@@ -1,7 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.Drinks;
 
-import com.pluralsight.enums.DrinkName;
-import com.pluralsight.enums.DrinkSize;
+import com.pluralsight.MenuItem;
 
 public class Drink implements MenuItem {
     private DrinkName name;

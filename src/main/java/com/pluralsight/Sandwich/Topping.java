@@ -1,8 +1,4 @@
-package com.pluralsight;
-
-import com.pluralsight.enums.SandwichSize;
-import com.pluralsight.enums.ToppingName;
-import com.pluralsight.enums.ToppingType;
+package com.pluralsight.Sandwich;
 
 public class Topping {
     private ToppingName name;

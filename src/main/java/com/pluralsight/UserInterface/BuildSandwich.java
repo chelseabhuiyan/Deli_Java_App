@@ -1,6 +1,10 @@
-package com.pluralsight;
+package com.pluralsight.UserInterface;
 
-import com.pluralsight.enums.*;
+import com.pluralsight.Sandwich.*;
+import com.pluralsight.Order;
+import com.pluralsight.Sides;
+import com.pluralsight.SidesType;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

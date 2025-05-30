@@ -1,4 +1,4 @@
-package com.pluralsight.enums;
+package com.pluralsight.Sandwich;
 
 public enum ToppingName {
     // Meats

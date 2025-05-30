@@ -1,4 +1,4 @@
-package com.pluralsight.enums;
+package com.pluralsight.Drinks;
 
 public enum DrinkSize {
     SMALL, MEDIUM, LARGE

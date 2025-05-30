@@ -1,9 +1,10 @@
-package com.pluralsight;
+package com.pluralsight.UserInterface;
 
-import com.pluralsight.enums.DrinkName;
-import com.pluralsight.enums.DrinkSize;
+import com.pluralsight.Drinks.Drink;
+import com.pluralsight.Order;
+import com.pluralsight.Drinks.DrinkName;
+import com.pluralsight.Drinks.DrinkSize;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class OrderDrink {

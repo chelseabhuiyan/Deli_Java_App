@@ -1,9 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.Sandwich;
 
-import com.pluralsight.enums.BreadType;
-import com.pluralsight.enums.SandwichSize;
-import com.pluralsight.enums.ToppingName;
-import com.pluralsight.enums.ToppingType;
+import com.pluralsight.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;

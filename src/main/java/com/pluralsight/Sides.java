@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-import com.pluralsight.enums.SidesType;
-
 public class Sides implements MenuItem {
     private SidesType name;
 

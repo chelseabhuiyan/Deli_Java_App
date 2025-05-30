@@ -1,6 +1,6 @@
-package com.pluralsight;
+package com.pluralsight.Chips;
 
-import com.pluralsight.enums.ChipName;
+import com.pluralsight.MenuItem;
 
 public class Chip implements MenuItem {
     private ChipName name;
