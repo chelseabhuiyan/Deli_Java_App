@@ -14,9 +14,10 @@ public class OrderManager {
         while (ordering) {
             System.out.println("\n---- New Order ----");
             System.out.println("1) Add Sandwich");
-            System.out.println("2) Add Drink");
-            System.out.println("3) Add Chips");
-            System.out.println("4) Checkout");
+            System.out.println("2. Add Signature Sandwich");
+            System.out.println("3) Add Drink");
+            System.out.println("4) Add Chips");
+            System.out.println("5) Checkout");
             System.out.println("0) Cancel Order");
             System.out.print("Select an option: ");
             String choice = scanner.nextLine();
@@ -26,12 +27,15 @@ public class OrderManager {
                     BuildSandwich.createSandwich(scanner, currentOrder); // adds item using addItem()
                     break;
                 case "2":
-                    OrderDrink.addDrink(scanner, currentOrder); // adds item using addItem()
+                    OrderSignatureSandwich.addSignatureSandwich(scanner, currentOrder);
                     break;
                 case "3":
-                    OrderChips.addChip(scanner, currentOrder); // adds item using addItem()
+                    OrderDrink.addDrink(scanner, currentOrder); // adds item using addItem()
                     break;
                 case "4":
+                    OrderChips.addChip(scanner, currentOrder); // adds item using addItem()
+                    break;
+                case "5":
                     checkoutOrder(scanner);
                     ordering = false;
                     break;

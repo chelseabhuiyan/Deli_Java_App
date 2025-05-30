@@ -127,7 +127,7 @@ public class Order {
 
         r.append("------------------------------\n")
                 .append(String.format("Total: $%.2f\n", getTotalCost()))
-                .append("==============================\n");
+                .append("--------------------------\n");
 
         return r.toString();
     }
